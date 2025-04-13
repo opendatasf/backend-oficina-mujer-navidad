@@ -1,9 +1,11 @@
 {
   "name": "google-drive-uploader-mccd",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node api/index.js",
+    "dev": "nodemon api/index.js"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "googleapis": "^148.0.0",
-    "multer": "^1.4.5-lts.2"
+    "multer": "^1.4.5-lts.2",
+    "nodemon": "^3.1.9"
   }
 }
