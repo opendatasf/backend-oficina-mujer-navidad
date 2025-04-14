@@ -82,7 +82,7 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   }
 });
 
-app.post("/", upload.single("file"), async (req, res) => {
+app.get("/", upload.single("file"), async (req, res) => {
   return res.json({
     message: "Hola, api de uploading de mccd arriba!",
   });
