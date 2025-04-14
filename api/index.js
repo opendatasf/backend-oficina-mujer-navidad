@@ -88,8 +88,5 @@ app.post("/", upload.single("file"), async (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 API corriendo en http://localhost:${PORT}`);
-});
+export default app;
 // deploy 5
