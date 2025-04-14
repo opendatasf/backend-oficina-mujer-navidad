@@ -82,8 +82,14 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   }
 });
 
+app.post("/", upload.single("file"), async (req, res) => {
+  return res.json({
+    message: "Hola, api de uploading de mccd arriba!",
+  });
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 API corriendo en http://localhost:${PORT}`);
 });
-// deploy 3
+// deploy 4
