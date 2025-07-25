@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { google } from "googleapis";
 import { Readable } from "stream";
+import fetch from "node-fetch"; // 👈 importa fetch para llamar a AppScript
 
 dotenv.config();
 const app = express();
@@ -22,6 +23,7 @@ app.use(
     },
   })
 );
+app.use(express.json()); // 👈 importante para parsear JSON
 
 // Google Auth
 const auth = new google.auth.GoogleAuth({
@@ -44,13 +46,33 @@ const auth = new google.auth.GoogleAuth({
   },
   scopes: ["https://www.googleapis.com/auth/drive"],
 });
-
 const driveService = google.drive({ version: "v3", auth });
+
+app.post("/sendToSheets", async (req, res) => {
+  try {
+    const datos = req.body;
+    const APPSCRIPT_URL = process.env.APPSCRIPT_URL;
+
+    const response = await fetch(APPSCRIPT_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(datos),
+    });
+
+    const text = await response.text();
+    res.status(200).json({ message: "✅ Datos enviados correctamente a Sheets", respuesta: text });
+  } catch (error) {
+    console.error("❌ Error al enviar datos a AppScript:", error);
+    res.status(500).json({ error: "Error interno al conectar con AppScript" });
+  }
+});
+
 
 app.post("/upload", upload.single("file"), async (req, res) => {
   try {
     const file = req.file;
     const folderId = req.body.folderId;
+    console.log({folderId})
 
     if (!file || !folderId) {
       return res.status(400).json({ error: "Archivo o folderId faltante" });
@@ -71,10 +93,10 @@ app.post("/upload", upload.single("file"), async (req, res) => {
         body: bufferStream,
       },
       fields: "id",
+        supportsAllDrives: true
     });
 
     const fileUrl = `https://drive.google.com/file/d/${data.id}/view`;
-
     res.json({ fileId: data.id, fileUrl });
   } catch (error) {
     console.error("❌ Error al subir:", error);
@@ -87,6 +109,13 @@ app.get("/", upload.single("file"), async (req, res) => {
     message: "Hola, api de uploading de mccd arriba!",
   });
 });
+
+//de uso local 
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor escuchando en http://localhost:${PORT}`);
+}); 
+
 
 export default app;
 // deploy 8
