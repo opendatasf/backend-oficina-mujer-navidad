@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "public"."Inscription" ALTER COLUMN "escolaridad" DROP NOT NULL,
+ALTER COLUMN "estadoCivil" DROP NOT NULL,
+ALTER COLUMN "direccion" DROP NOT NULL,
+ALTER COLUMN "telefono" DROP NOT NULL,
+ALTER COLUMN "tipoTaller" DROP NOT NULL,
+ALTER COLUMN "estado" DROP NOT NULL;

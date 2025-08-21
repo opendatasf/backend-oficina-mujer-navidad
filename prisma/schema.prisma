@@ -1,0 +1,33 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Inscription {
+  id                       Int       @id @default(autoincrement())
+  nombres                  String
+  apellidos                String
+  rut                      String
+  nacionalidad             String
+  curso                    String
+  anio                     Int
+  fechaNacimiento          DateTime?
+  escolaridad              String?
+  estadoCivil              String?
+  direccion                String?
+  telefono                 String?
+  enfermedadPreexistente   String?
+  discapacidad             String?
+  derivacion               String?
+  asistioOtroTaller        Boolean   @default(false)
+  especificacionesAnterior String?
+  infoRelevante            String?
+  duracionMeses            Int?
+  certificacion            String?
+  tipoTaller               String?
+  estado                   String?
+}

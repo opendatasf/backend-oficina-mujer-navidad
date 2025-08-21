@@ -4,7 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { google } from "googleapis";
 import { Readable } from "stream";
-import fetch from "node-fetch"; // 👈 importa fetch para llamar a AppScript
+import fetch from "node-fetch";
+import {insertInscription} from "./insertInscription.js"; // 👈 importa fetch para llamar a AppScript
 
 dotenv.config();
 const app = express();
@@ -58,6 +59,8 @@ app.post("/sendToSheets", async (req, res) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(datos),
     });
+
+    await insertInscription(datos);
 
     const text = await response.text();
     res.status(200).json({ message: "✅ Datos enviados correctamente a Sheets", respuesta: text });
