@@ -1,0 +1,28 @@
+{
+  "workbench.colorCustomizations": {
+    // Morado oscuro para áreas principales
+    "activityBar.background": "#2a1a48",
+    "statusBar.background": "#2a1a48",
+    "breadcrumb.background": "#2a1a48",
+
+    // Morado intermedio para estados activos
+    "activityBar.activeBackground": "#43246e",
+    "tab.activeBackground": "#43246e",
+    "statusBar.debuggingBackground": "#43246e",
+    "statusBar.noFolderBackground": "#43246e",
+
+    // Morado más oscuro para áreas secundarias
+    "minimap.background": "#1d1033",
+    "sideBar.background": "#1d1033",
+    //"terminal.background": "#1d1033",
+
+    // Colores de texto y bordes para contraste
+    "editorLineNumber.foreground": "#ad5cad",
+    "tab.border": "#43246e",
+    "editorCursor.foreground": "#ad5cad",
+    "editor.foreground": "#f7d4f7",
+    "statusBar.foreground": "#f7d4f7",
+    "activityBar.foreground": "#f7d4f7",
+    "titleBar.activeForeground": "#f7d4f7"
+  }
+}
